@@ -1,0 +1,17 @@
+{
+  "name": "rating",
+  "repo": "code42day/rating",
+  "description": "Read-only rating displayed as start",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js",
+    "template.js"
+  ],
+  "styles": [
+    "rating.css"
+  ]
+}
