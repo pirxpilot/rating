@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Rating</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="build/build.css" type="text/css">
+    <style>
+      body {
+        margin: 50px;
+      }
+      #star-rating,
+      form {
+        font-size: 2em;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rating</h1>
+    <div id='star-rating'></div>
+    <form>
+      <input id='counter' type='range' min='0' max='100' value='50' step='5'>
+    </form>
+    <script src='build/build.js'></script>
+    <script>
+      var rating = require('rating'),
+        r = rating(document.getElementById('star-rating'), 50);
+
+        document.getElementById('counter').addEventListener('change', function(e) {
+          r.set(this.value);
+        });
+    </script>
+  </body>
+</html>

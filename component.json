@@ -1,10 +1,12 @@
 {
   "name": "rating",
   "repo": "code42day/rating",
-  "description": "Read-only rating displayed as start",
+  "description": "Display stars based on numeric rating (read-only)",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "component/domify": "*"
+  },
   "development": {},
   "license": "MIT",
   "scripts": [

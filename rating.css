@@ -1,0 +1,16 @@
+.rating {
+	display: inline-block;
+	position: relative;
+}
+
+.rating .stars {
+	color: yellow;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+.rating .shadow {
+	color: grey;
+}
