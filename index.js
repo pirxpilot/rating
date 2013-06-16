@@ -5,7 +5,7 @@ module.exports = rating;
 
 function rating(el, r) {
 	var self = {},
-		node = domify(html).pop();
+		node = domify(html);
 
 	el.appendChild(node);
 	if (typeof r === 'number') {

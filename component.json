@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "component/domify": "*"
+    "component/domify": "1.0.0"
   },
   "development": {},
   "license": "MIT",
