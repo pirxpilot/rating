@@ -15,6 +15,11 @@
 Add rating component to `el` and display the `value`
 
 
+### rating(el, options)
+
+options is an object that allows specifying alternative star character and/or initial value
+
+
 ### rating.set(value)
 
 Change the `value` of existing rating.
