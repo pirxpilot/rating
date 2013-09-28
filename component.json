@@ -2,16 +2,12 @@
   "name": "rating",
   "repo": "code42day/rating",
   "description": "Display stars based on numeric rating (read-only)",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "keywords": [],
-  "dependencies": {
-    "component/domify": "1.0.0"
-  },
   "development": {},
   "license": "MIT",
   "scripts": [
-    "index.js",
-    "template.js"
+    "index.js"
   ],
   "styles": [
     "rating.css"
