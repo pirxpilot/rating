@@ -7,26 +7,40 @@
       body {
         margin: 50px;
       }
-      #star-rating,
+      #star-rating-1,
+      #star-rating-2,
       form {
+        display: block;
         font-size: 2em;
-        margin-top: 1em;
+        margin-top: .5em;
+      }
+      #star-rating-2 .stars {
+        color: orange;
+      }
+      #star-rating-2 .shadow {
+        color: lightgreen;
       }
     </style>
   </head>
   <body>
     <h1>Rating</h1>
-    <div id='star-rating'></div>
+    <div id='star-rating-1'></div>
+    <div id='star-rating-2'></div>
     <form>
-      <input id='counter' type='range' min='0' max='100' value='50' step='5'>
+      <input id='counter' type='range' min='0' max='100' value='25' step='5'>
     </form>
     <script src='build/build.js'></script>
     <script>
       var rating = require('rating'),
-        r = rating(document.getElementById('star-rating'), 50);
+        r1 = rating(document.getElementById('star-rating-1'), 25),
+        r2 = rating(document.getElementById('star-rating-2'), {
+          value: 25,
+          star: '&#x2764;'
+        });
 
         document.getElementById('counter').addEventListener('change', function(e) {
-          r.set(this.value);
+          r1.set(this.value);
+          r2.set(this.value);
         });
     </script>
   </body>

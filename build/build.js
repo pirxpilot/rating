@@ -1,11 +1,4 @@
 
-
-/**
- * hasOwnProperty.
- */
-
-var has = Object.prototype.hasOwnProperty;
-
 /**
  * Require the given path.
  *
@@ -33,10 +26,14 @@ function require(path, parent, orig) {
   // perform real require()
   // by invoking the module's
   // registered function
-  if (!module.exports) {
-    module.exports = {};
-    module.client = module.component = true;
-    module.call(this, module.exports, require.relative(resolved), module);
+  if (!module._resolving && !module.exports) {
+    var mod = {};
+    mod.exports = {};
+    mod.client = mod.component = true;
+    module._resolving = true;
+    module.call(this, mod.exports, require.relative(resolved), mod);
+    delete module._resolving;
+    module.exports = mod.exports;
   }
 
   return module.exports;
@@ -70,7 +67,6 @@ require.aliases = {};
 
 require.resolve = function(path) {
   if (path.charAt(0) === '/') path = path.slice(1);
-  var index = path + '/index.js';
 
   var paths = [
     path,
@@ -82,11 +78,8 @@ require.resolve = function(path) {
 
   for (var i = 0; i < paths.length; i++) {
     var path = paths[i];
-    if (has.call(require.modules, path)) return path;
-  }
-
-  if (has.call(require.aliases, index)) {
-    return require.aliases[index];
+    if (require.modules.hasOwnProperty(path)) return path;
+    if (require.aliases.hasOwnProperty(path)) return require.aliases[path];
   }
 };
 
@@ -139,7 +132,7 @@ require.register = function(path, definition) {
  */
 
 require.alias = function(from, to) {
-  if (!has.call(require.modules, from)) {
+  if (!require.modules.hasOwnProperty(from)) {
     throw new Error('Failed to alias "' + from + '", it does not exist');
   }
   require.aliases[to] = from;
@@ -201,19 +194,82 @@ require.relative = function(parent) {
    */
 
   localRequire.exists = function(path) {
-    return has.call(require.modules, localRequire.resolve(path));
+    return require.modules.hasOwnProperty(localRequire.resolve(path));
   };
 
   return localRequire;
 };
-require.register("component-domify/index.js", Function("exports, require, module",
-"\n/**\n * Expose `parse`.\n */\n\nmodule.exports = parse;\n\n/**\n * Wrap map from jquery.\n */\n\nvar map = {\n  option: [1, '<select multiple=\"multiple\">', '</select>'],\n  optgroup: [1, '<select multiple=\"multiple\">', '</select>'],\n  legend: [1, '<fieldset>', '</fieldset>'],\n  thead: [1, '<table>', '</table>'],\n  tbody: [1, '<table>', '</table>'],\n  tfoot: [1, '<table>', '</table>'],\n  colgroup: [1, '<table>', '</table>'],\n  caption: [1, '<table>', '</table>'],\n  tr: [2, '<table><tbody>', '</tbody></table>'],\n  td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],\n  th: [3, '<table><tbody><tr>', '</tr></tbody></table>'],\n  col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],\n  _default: [0, '', '']\n};\n\n/**\n * Parse `html` and return the children.\n *\n * @param {String} html\n * @return {Array}\n * @api private\n */\n\nfunction parse(html) {\n  if ('string' != typeof html) throw new TypeError('String expected');\n  \n  // tag name\n  var m = /<([\\w:]+)/.exec(html);\n  if (!m) throw new Error('No elements were generated.');\n  var tag = m[1];\n  \n  // body support\n  if (tag == 'body') {\n    var el = document.createElement('html');\n    el.innerHTML = html;\n    return [el.removeChild(el.lastChild)];\n  }\n  \n  // wrap map\n  var wrap = map[tag] || map._default;\n  var depth = wrap[0];\n  var prefix = wrap[1];\n  var suffix = wrap[2];\n  var el = document.createElement('div');\n  el.innerHTML = prefix + html + suffix;\n  while (depth--) el = el.lastChild;\n\n  return orphan(el.children);\n}\n\n/**\n * Orphan `els` and return an array.\n *\n * @param {NodeList} els\n * @return {Array}\n * @api private\n */\n\nfunction orphan(els) {\n  var ret = [];\n\n  while (els.length) {\n    ret.push(els[0].parentNode.removeChild(els[0]));\n  }\n\n  return ret;\n}\n//@ sourceURL=component-domify/index.js"
-));
 require.register("rating/index.js", Function("exports, require, module",
-"var html = require('./template');\nvar domify = require('domify');\n\nmodule.exports = rating;\n\nfunction rating(el, r) {\n\tvar self = {},\n\t\tnode = domify(html).pop();\n\n\tel.appendChild(node);\n\tif (typeof r === 'number') {\n\t\tset(r);\n\t}\n\n\tfunction set(r) {\n\t\tvar style = 'width:' + r + '%;';\n\t\tnode.querySelector('.stars').setAttribute('style', style);\n\t\treturn self;\n\t}\n\n\tself.set = set;\n\n\treturn self;\n}//@ sourceURL=rating/index.js"
+"module.exports = rating;\n\
+\n\
+\n\
+function content(star) {\n\
+\tvar i, c = [];\n\
+\tfor(i = 0; i < 5; i++) {\n\
+\t\tc[i] = star;\n\
+\t}\n\
+\treturn c.join('');\n\
+}\n\
+\n\
+function div(className, content) {\n\
+\tvar node = document.createElement('div');\n\
+\tnode.className = className;\n\
+\tif (content) {\n\
+\t\tnode.innerHTML = content;\n\
+\t}\n\
+\treturn node;\n\
+}\n\
+\n\
+/**\n\
+ * creates rating HTML that looks like this:\n\
+ *\t\tdiv.rating\n\
+ *\t\t\tdiv.shadow= ★★★★★\n\
+ *\t\t\tdiv.stars=  ★★★★★\n\
+ */\n\
+function create(star) {\n\
+\tvar c, node;\n\
+\n\
+\tc = content(star);\n\
+\tnode = div('rating');\n\
+\tnode.appendChild(div('shadow', c));\n\
+\tnode.appendChild(div('stars', c ));\n\
+\n\
+\treturn node;\n\
+}\n\
+\n\
+/**\n\
+ * Creates rating component\n\
+ * @param el {Node} - DOM node to which we will append rating\n\
+ * @param options {Object} - optional {star, value} object when\n\
+ *     `star` is the character displayed in rating and `value` is the initial rating\n\
+ */\n\
+function rating(el, options) {\n\
+\tvar self = {}, node;\n\
+\n\
+\tif (typeof options === 'number') {\n\
+\t\toptions = {\n\
+\t\t\tvalue: options\n\
+\t\t};\n\
+\t} else {\n\
+\t\toptions = options || {};\n\
+\t}\n\
+\toptions.star = options.star || '&#9733;';\n\
+\toptions.value = options.value || 0;\n\
+\n\
+\tnode = create(options.star);\n\
+\tel.appendChild(node);\n\
+\tif (options.value) {\n\
+\t\tset(options.value);\n\
+\t}\n\
+\n\
+\tfunction set(r) {\n\
+\t\tvar style = 'width:' + r + '%;';\n\
+\t\tnode.childNodes[1].setAttribute('style', style);\n\
+\t\treturn self;\n\
+\t}\n\
+\n\
+\tself.set = set;\n\
+\n\
+\treturn self;\n\
+}//@ sourceURL=rating/index.js"
 ));
-require.register("rating/template.js", Function("exports, require, module",
-"module.exports = '<div class=\\'rating\\'>\\n\t<div class=\\'shadow\\'>&#9733;&#9733;&#9733;&#9733;&#9733;</div>\\n\t<div class=\\'stars\\'>&#9733;&#9733;&#9733;&#9733;&#9733;</div>\\n</div>';//@ sourceURL=rating/template.js"
-));
-require.alias("component-domify/index.js", "rating/deps/domify/index.js");
-
