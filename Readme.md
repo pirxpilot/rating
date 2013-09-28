@@ -19,6 +19,18 @@ Add rating component to `el` and display the `value`
 
 options is an object that allows specifying alternative star character and/or initial value
 
+````javascript
+var rating = require('rating');
+
+// use ★ and initial value 25
+rating(parent, 25);
+
+// use ❤ and initial value 50
+rating(parent, {
+  value: 50,
+  star: '&#x2764;'  // ❤
+});
+````
 
 ### rating.set(value)
 
