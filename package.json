@@ -1,6 +1,6 @@
 {
   "name": "code42day-rating",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Display stars based on numeric rating (read-only)",
   "scripts": {
     "test": "make check"
@@ -12,8 +12,6 @@
   "keywords": [
     "browser"
   ],
-  "dependencies": {},
-  "browser": {},
   "author": "Damian Krzeminski <pirxpilot@code42day.com>",
   "license": "MIT",
   "bugs": {
