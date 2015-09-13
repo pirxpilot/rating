@@ -1,0 +1,22 @@
+{
+  "name": "code42day-rating",
+  "version": "1.0.0",
+  "description": "Display stars based on numeric rating (read-only)",
+  "scripts": {
+    "test": "make check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code42day/rating.git"
+  },
+  "keywords": [
+    "browser"
+  ],
+  "dependencies": {},
+  "browser": {},
+  "author": "Damian Krzeminski <pirxpilot@code42day.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code42day/rating/issues"
+  }
+}
