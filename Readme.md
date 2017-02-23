@@ -2,11 +2,11 @@
 # rating
 
   Read-only numeric rating (0-100) displayed as stars.
-  Click [here](http://code42day.github.com/rating) to see the example.
+  Click [here](http://pirxpilot.github.com/rating) to see the example.
 
 ## Installation
 
-    $ component install code42day/rating
+    $ npm install ro-rating
 
 ## API
 

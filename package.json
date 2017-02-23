@@ -1,5 +1,5 @@
 {
-  "name": "code42day-rating",
+  "name": "ro-rating",
   "version": "1.0.1",
   "description": "Display stars based on numeric rating (read-only)",
   "scripts": {
@@ -7,14 +7,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/code42day/rating.git"
+    "url": "https://github.com/pirxpilot/rating.git"
   },
   "keywords": [
     "browser"
   ],
-  "author": "Damian Krzeminski <pirxpilot@code42day.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/code42day/rating/issues"
-  }
+  "author": "Damian Krzeminski <pirxpilot@furkot.com>",
+  "license": "MIT"
 }
