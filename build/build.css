@@ -9,6 +9,7 @@
 	top: 0;
 	left: 0;
 	overflow: hidden;
+  white-space: nowrap;
 }
 
 .rating .shadow {
