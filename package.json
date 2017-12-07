@@ -2,16 +2,22 @@
   "name": "ro-rating",
   "version": "1.0.3",
   "description": "Display stars based on numeric rating (read-only)",
+  "author": {
+    "name": "Damian Krzeminski",
+    "email": "pirxpilot@furkot.com",
+    "url": "https://pirxpilot.me"
+  },
+  "repository": "pirxpilot/rating",
+  "license": "MIT",
+  "keywords": [
+    "browser",
+    "rating"
+  ],
   "scripts": {
     "test": "make check"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pirxpilot/rating.git"
-  },
-  "keywords": [
-    "browser"
-  ],
-  "author": "Damian Krzeminski <pirxpilot@furkot.com>",
-  "license": "MIT"
+  "files": [
+    "index.js",
+    "rating.css"
+  ]
 }
