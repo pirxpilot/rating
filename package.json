@@ -19,5 +19,9 @@
   "files": [
     "index.js",
     "rating.css"
-  ]
+  ],
+  "devDependencies": {
+    "browserify": "~14",
+    "jshint": "~2"
+  }
 }
