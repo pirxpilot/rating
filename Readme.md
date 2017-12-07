@@ -1,3 +1,5 @@
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
 
 # rating
 
@@ -40,3 +42,12 @@ Change the `value` of existing rating.
 ## License
 
   MIT
+
+MIT © [Damian Krzeminski](https://pirxpilot.me)
+
+[npm-image]: https://img.shields.io/npm/v/ro-rating.svg
+[npm-url]: https://npmjs.org/package/ro-rating
+
+[travis-url]: https://travis-ci.org/pirxpilot/rating
+[travis-image]: https://img.shields.io/travis/pirxpilot/rating.svg
+
