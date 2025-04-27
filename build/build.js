@@ -1,74 +1,63 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"rating":[function(require,module,exports){
-module.exports = rating;
+var rating = (() => {
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-
-function content(star) {
-	var i, c = [];
-	for(i = 0; i < 5; i++) {
-		c[i] = star;
-	}
-	return c.join('');
-}
-
-function div(className, content) {
-	var node = document.createElement('div');
-	node.className = className;
-	if (content) {
-		node.innerHTML = content;
-	}
-	return node;
-}
-
-/**
- * creates rating HTML that looks like this:
- *		div.rating
- *			div.shadow= ★★★★★
- *			div.stars=  ★★★★★
- */
-function create(star) {
-	var c, node;
-
-	c = content(star);
-	node = div('rating');
-	node.appendChild(div('shadow', c));
-	node.appendChild(div('stars', c ));
-
-	return node;
-}
-
-/**
- * Creates rating component
- * @param el {Node} - DOM node to which we will append rating
- * @param options {Object} - optional {star, value} object when
- *     `star` is the character displayed in rating and `value` is the initial rating
- */
-function rating(el, options) {
-	var self = {}, node;
-
-	if (typeof options === 'number') {
-		options = {
-			value: options
-		};
-	} else {
-		options = options || {};
-	}
-	options.star = options.star || '&#9733;';
-	options.value = options.value || 0;
-
-	node = create(options.star);
-	el.appendChild(node);
-	if (options.value) {
-		set(options.value);
-	}
-
-	function set(r) {
-		var style = 'width:' + r + '%;';
-		node.childNodes[1].setAttribute('style', style);
-		return self;
-	}
-
-	self.set = set;
-
-	return self;
-}
-},{}]},{},[]);
+  // index.js
+  var index_exports = {};
+  __export(index_exports, {
+    default: () => rating
+  });
+  function rating(el, options = {}) {
+    const self = {
+      set
+    };
+    if (typeof options === "number") {
+      options = {
+        value: options
+      };
+    }
+    options.star ??= "&#9733;";
+    options.value ??= 0;
+    const node = create(options.star);
+    el.appendChild(node);
+    if (options.value) {
+      set(options.value);
+    }
+    return self;
+    function set(r) {
+      node.childNodes[1].setAttribute("style", `width:${r}%;`);
+      return self;
+    }
+  }
+  function create(star) {
+    const c = star.repeat(5);
+    const node = div("rating");
+    node.appendChild(div("shadow", c));
+    node.appendChild(div("stars", c));
+    return node;
+  }
+  function div(className, content) {
+    const node = document.createElement("div");
+    node.className = className;
+    if (content) {
+      node.innerHTML = content;
+    }
+    return node;
+  }
+  return __toCommonJS(index_exports);
+})();

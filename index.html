@@ -31,9 +31,9 @@
     </form>
     <script src='build/build.js'></script>
     <script>
-      var rating = require('rating'),
-        r1 = rating(document.getElementById('star-rating-1'), 25),
-        r2 = rating(document.getElementById('star-rating-2'), {
+        rating = rating.default;
+        const r1 = rating(document.getElementById('star-rating-1'), 25);
+        const r2 = rating(document.getElementById('star-rating-2'), {
           value: 25,
           star: '&#x2764;'
         });
