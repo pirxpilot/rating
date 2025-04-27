@@ -1,27 +1,38 @@
 PROJECT=rating
 NODE_BIN=./node_modules/.bin
+SRC = index.js
+CSS = rating.css
 
-
-all: check build
+all: check compile
 
 check: lint
 
-lint: | node_modules
-	$(NODE_BIN)/jshint index.js
+compile: build/build.js build/build.css
 
-build: build/build.js build/build.css
+build:
+	mkdir -p $@
 
-build/build.js: node_modules index.js
-	mkdir -p build
-	$(NODE_BIN)/browserify --require ./index.js:$(PROJECT) --outfile $@
+build/build.css: $(CSS) | build
+	cat $^ > $@
 
-build/build.css: rating.css
-	cp $< $@
+build/build.js: node_modules $(SRC) | build
+	$(NODE_BIN)/esbuild \
+		--bundle \
+		--global-name=rating \
+		--outfile=$@ \
+		index.js
 
 node_modules: package.json
-	npm install && touch $@
+	yarn
+	touch $@
+
+lint: | node_modules
+	$(NODE_BIN)/biome ci
+
+format: | node_modules
+	$(NODE_BIN)/biome check --fix
 
 clean:
 	rm -fr build node_modules
 
-.PHONY: clean lint check all build
+.PHONY: clean lint format check all compile

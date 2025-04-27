@@ -1,21 +1,21 @@
 module.exports = rating;
 
-
 function content(star) {
-	var i, c = [];
-	for(i = 0; i < 5; i++) {
-		c[i] = star;
-	}
-	return c.join('');
+  let i;
+  const c = [];
+  for (i = 0; i < 5; i++) {
+    c[i] = star;
+  }
+  return c.join('');
 }
 
 function div(className, content) {
-	var node = document.createElement('div');
-	node.className = className;
-	if (content) {
-		node.innerHTML = content;
-	}
-	return node;
+  const node = document.createElement('div');
+  node.className = className;
+  if (content) {
+    node.innerHTML = content;
+  }
+  return node;
 }
 
 /**
@@ -25,14 +25,12 @@ function div(className, content) {
  *			div.stars=  ★★★★★
  */
 function create(star) {
-	var c, node;
+  const c = content(star);
+  const node = div('rating');
+  node.appendChild(div('shadow', c));
+  node.appendChild(div('stars', c));
 
-	c = content(star);
-	node = div('rating');
-	node.appendChild(div('shadow', c));
-	node.appendChild(div('stars', c ));
-
-	return node;
+  return node;
 }
 
 /**
@@ -42,31 +40,31 @@ function create(star) {
  *     `star` is the character displayed in rating and `value` is the initial rating
  */
 function rating(el, options) {
-	var self = {}, node;
+  const self = {};
 
-	if (typeof options === 'number') {
-		options = {
-			value: options
-		};
-	} else {
-		options = options || {};
-	}
-	options.star = options.star || '&#9733;';
-	options.value = options.value || 0;
+  if (typeof options === 'number') {
+    options = {
+      value: options
+    };
+  } else {
+    options = options || {};
+  }
+  options.star = options.star || '&#9733;';
+  options.value = options.value || 0;
 
-	node = create(options.star);
-	el.appendChild(node);
-	if (options.value) {
-		set(options.value);
-	}
+  const node = create(options.star);
+  el.appendChild(node);
+  if (options.value) {
+    set(options.value);
+  }
 
-	function set(r) {
-		var style = 'width:' + r + '%;';
-		node.childNodes[1].setAttribute('style', style);
-		return self;
-	}
+  function set(r) {
+    const style = 'width:' + r + '%;';
+    node.childNodes[1].setAttribute('style', style);
+    return self;
+  }
 
-	self.set = set;
+  self.set = set;
 
-	return self;
+  return self;
 }

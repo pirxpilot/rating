@@ -7,7 +7,10 @@
     "email": "pirxpilot@furkot.com",
     "url": "https://pirxpilot.me"
   },
-  "repository": "pirxpilot/rating",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirxpilot/rating.git"
+  },
   "license": "MIT",
   "keywords": [
     "browser",
@@ -21,7 +24,7 @@
     "rating.css"
   ],
   "devDependencies": {
-    "browserify": "~14",
-    "jshint": "~2"
+    "@biomejs/biome": "^1.9.4",
+    "esbuild": "^0.25.3"
   }
 }

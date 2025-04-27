@@ -1,17 +1,17 @@
 .rating {
-	display: inline-block;
-	position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .rating .stars {
-	color: yellow;
-	position: absolute;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-	white-space: nowrap;
+  color: yellow;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .rating .shadow {
-	color: grey;
+  color: grey;
 }
