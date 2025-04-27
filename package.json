@@ -2,6 +2,8 @@
   "name": "ro-rating",
   "version": "1.0.4",
   "description": "Display stars based on numeric rating (read-only)",
+  "type": "module",
+  "exports": "./index.js",
   "author": {
     "name": "Damian Krzeminski",
     "email": "pirxpilot@furkot.com",

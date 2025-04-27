@@ -1,12 +1,10 @@
-module.exports = rating;
-
 /**
  * Creates rating component
  * @param el {Node} - DOM node to which we will append rating
  * @param options {Object} - optional {star, value} object when
  *     `star` is the character displayed in rating and `value` is the initial rating
  */
-function rating(el, options = {}) {
+export default function rating(el, options = {}) {
   const self = {
     set
   };
