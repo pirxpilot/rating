@@ -1,5 +1,5 @@
 [![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][build-image]][build-url]
 
 # rating
 
@@ -45,9 +45,9 @@ Change the `value` of existing rating.
 
 MIT © [Damian Krzeminski](https://pirxpilot.me)
 
-[npm-image]: https://img.shields.io/npm/v/ro-rating.svg
+[npm-image]: https://img.shields.io/npm/v/ro-rating
 [npm-url]: https://npmjs.org/package/ro-rating
 
-[travis-url]: https://travis-ci.org/pirxpilot/rating
-[travis-image]: https://img.shields.io/travis/pirxpilot/rating.svg
+[build-url]: https://github.com/pirxpilot/rating/actions/workflows/check.yaml
+[build-image]: https://img.shields.io/github/actions/workflow/status/pirxpilot/rating/check.yaml?branch=main
 
